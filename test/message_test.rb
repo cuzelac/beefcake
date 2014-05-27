@@ -225,6 +225,13 @@ class MessageTest < Test::Unit::TestCase
     assert_equal buf.to_s, msg.encode.to_s
   end
 
+  def test_repeated_field_array_encodes_like_single_value
+    int_msg = RepeatedMessage.new :a => 1
+    ary_msg = RepeatedMessage.new :a => [1]
+
+    assert_equal int_msg.encode.to_s, ary_msg.encode.to_s
+  end
+
   def test_encode_packed_repeated_field
     buf = Beefcake::Buffer.new
 
